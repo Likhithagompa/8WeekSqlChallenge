@@ -1,3 +1,37 @@
+-- cleaning data
+
+update customer_orders
+set exclusions = null
+where exclusions = "" or exclusions = "null" ;
+
+update customer_orders
+set extras = null
+where extras = "" or extras = "null" ;
+
+update runner_orders 
+set cancellation = null
+where cancellation = "" or cancellation = "null";
+
+update runner_orders 
+set distance = replace(distance, "km", "")
+where distance like "%km%";
+
+update runner_orders
+set distance = null 
+where distance like "%null%";
+
+update runner_orders
+set duration = replace(replace(replace(duration, "mins",""),"minute",""),"minutes","")
+where duration like "%min%";
+
+update runner_orders
+set duration = null 
+where duration like "%null%";
+
+update runner_orders
+set pickup_time = null 
+where pickup_time like "%null%";
+
 -- A. Pizza Metrics
 
 SELECT 
